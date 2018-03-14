@@ -1,8 +1,11 @@
 ﻿using System.Collections.Generic;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ValidateToken.Controllers
 {
+    [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
     [Route("api/[controller]")]
     public class ValuesController : Controller
     {
@@ -19,6 +22,7 @@ namespace ValidateToken.Controllers
 
         // GET api/values/anonymous
         [HttpGet("anonymous")]
+        [AllowAnonymous]
         public IEnumerable<string> GetAnonymous()
         {
             return new[]
